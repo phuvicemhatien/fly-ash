@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -7,78 +8,390 @@
 <title>Fly ASH</title>
 <style>
 :root{--bg:#f3f6f4;--card:#fff;--ink:#18372a;--muted:#6c7b73;--green:#26734d;--dark:#142b22;--pale:#e4f2e9;--line:#dce7df;--red:#a52b2b}
-*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:var(--bg)}
-header{background:var(--dark);color:#fff;padding:16px 14px}.brand{display:flex;align-items:center;gap:12px;max-width:900px;margin:auto}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:var(--bg)}
+header{background:var(--dark);color:#fff;padding:16px 14px}
+.brand{display:flex;align-items:center;gap:12px;max-width:900px;margin:auto}
 .logo{width:50px;height:50px;object-fit:contain;border-radius:10px;background:#fff;padding:3px;flex:0 0 50px}
-.brand h1{margin:0;font-size:23px}.brand p{margin:5px 0 0;font-size:11px;color:#c7d9cf}
-main{width:min(900px,100%);margin:auto;padding:14px}.shift-panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:14px}
-.section-label{text-align:center;font-size:12px;font-weight:800;color:var(--muted);margin-bottom:10px}.shift-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-.shift-option{position:relative}.shift-option input{position:absolute;opacity:0}.shift-option span{display:block;text-align:center;padding:10px 6px;border:1px solid var(--line);border-radius:10px;background:#f8faf8;font-weight:700}
+.brand h1{margin:0;font-size:23px}
+.brand p{margin:5px 0 0;font-size:11px;color:#c7d9cf}
+main{width:min(900px,100%);margin:auto;padding:14px}
+.shift-panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:14px}
+.section-label{text-align:center;font-size:12px;font-weight:800;color:var(--muted);margin-bottom:10px}
+.shift-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.shift-option{position:relative}
+.shift-option input{position:absolute;opacity:0}
+.shift-option span{display:block;text-align:center;padding:10px 6px;border:1px solid var(--line);border-radius:10px;background:#f8faf8;font-weight:700}
 .shift-option input:checked+span{background:var(--green);border-color:var(--green);color:#fff}
-.topline{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 10px}h2{font-size:17px;margin:0;text-align:center}
-button{font:inherit;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:10px;padding:9px 11px;font-weight:700;cursor:pointer}button:disabled{opacity:.55}
-.primary{background:var(--green);border-color:var(--green);color:#fff}.status{background:#fff;border:1px solid var(--line);border-radius:11px;padding:11px 12px;color:var(--muted);font-size:13px;margin-bottom:12px}.status.error{color:var(--red);border-color:#efcccc;background:#fffafa}
-.summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.supplier-card{min-width:0;background:var(--pale);border:1px solid #c6dfcf;border-radius:15px;padding:12px;text-align:center}
+.topline{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 10px}
+h2{font-size:17px;margin:0;text-align:center}
+button{font:inherit;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:10px;padding:9px 11px;font-weight:700;cursor:pointer}
+button:disabled{opacity:.55}
+.primary{background:var(--green);border-color:var(--green);color:#fff}
+.status{background:#fff;border:1px solid var(--line);border-radius:11px;padding:11px 12px;color:var(--muted);font-size:13px;margin-bottom:12px}
+.status.error{color:var(--red);border-color:#efcccc;background:#fffafa}
+.summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.supplier-card{min-width:0;background:var(--pale);border:1px solid #c6dfcf;border-radius:15px;padding:12px;text-align:center}
 .supplier-name{background:var(--green);color:#fff;font-weight:800;font-size:14px;border-radius:9px;padding:9px 6px;overflow-wrap:anywhere;margin-bottom:12px}
-.metric-label{font-size:11px;color:#426550;font-weight:700}.metric{font-size:clamp(20px,5vw,28px);font-weight:800;margin:3px 0 10px;overflow-wrap:anywhere}.actual{color:var(--green)}
+.metric-label{font-size:11px;color:#426550;font-weight:700}
+.metric{font-size:clamp(20px,5vw,28px);font-weight:800;margin:3px 0 10px;overflow-wrap:anywhere}
+.actual{color:var(--green)}
 .remaining{background:#fff;border-radius:8px;padding:8px 5px;font-size:12px;font-weight:700;display:flex;justify-content:center;gap:5px;flex-wrap:wrap}
-.summary-note{font-size:11px;color:var(--muted);text-align:center;margin:8px 0 0}.add-row{display:flex;justify-content:flex-end;margin:12px 0 20px}
-.trip-list{display:grid;gap:9px;margin-top:10px}.trip-card{display:grid;grid-template-columns:minmax(0,1fr) 116px 38px;gap:8px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:13px;padding:11px}
-.trip-main{min-width:0;text-align:center}.plate{font-size:16px;font-weight:800;overflow-wrap:anywhere}.trip-supplier{font-size:12px;color:var(--muted);margin-top:3px;overflow-wrap:anywhere}.trip-time{font-size:12px;margin-top:7px;font-variant-numeric:tabular-nums}
-.weight-box{background:var(--pale);border:1px solid #c6dfcf;border-radius:10px;padding:9px 4px;text-align:center;min-width:0}.weight-label{font-size:9px;font-weight:800;color:#426550;letter-spacing:.2px}
-.weight-line{display:flex;justify-content:center;align-items:baseline;gap:4px;margin-top:4px;white-space:nowrap}.weight-number{font-size:clamp(21px,5vw,27px);font-weight:900;color:#176b3a;line-height:1}.weight-unit{font-size:12px;font-weight:800;color:#176b3a}
-.edit-button{padding:8px 7px;display:flex;align-items:center;justify-content:center}.empty{background:#fff;border:1px dashed var(--line);border-radius:12px;text-align:center;padding:22px;color:var(--muted);font-size:13px}
-.modal-backdrop{position:fixed;inset:0;background:#0b2119a8;display:none;align-items:flex-end;justify-content:center;padding:12px;z-index:10}.modal-backdrop.open{display:flex}
-.modal{width:min(520px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:18px;padding:17px}.modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}.modal-head h2{text-align:left}.close-button{font-size:20px;padding:4px 10px}
-.field{margin-bottom:12px}.field label{display:block;font-size:12px;font-weight:800;margin-bottom:5px}.field input{width:100%;padding:11px;border:1px solid #cfdcd3;border-radius:9px;background:#fff;color:var(--ink);font:inherit;min-height:42px}
+.summary-note{font-size:11px;color:var(--muted);text-align:center;margin:8px 0 0}
+.add-row{display:flex;justify-content:flex-end;margin:12px 0 20px}
+.trip-list{display:grid;gap:9px;margin-top:10px}
+.trip-card{display:grid;grid-template-columns:minmax(0,1fr) 116px 38px;gap:8px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:13px;padding:11px}
+.trip-main{min-width:0;text-align:center}
+.plate{font-size:16px;font-weight:800;overflow-wrap:anywhere}
+.trip-supplier{font-size:12px;color:var(--muted);margin-top:3px;overflow-wrap:anywhere}
+.trip-time{font-size:12px;margin-top:7px;font-variant-numeric:tabular-nums}
+.weight-box{background:var(--pale);border:1px solid #c6dfcf;border-radius:10px;padding:9px 4px;text-align:center;min-width:0}
+.weight-label{font-size:9px;font-weight:800;color:#426550;letter-spacing:.2px}
+.weight-line{display:flex;justify-content:center;align-items:baseline;gap:4px;margin-top:4px;white-space:nowrap}
+.weight-number{font-size:clamp(21px,5vw,27px);font-weight:900;color:#176b3a;line-height:1}
+.weight-unit{font-size:12px;font-weight:800;color:#176b3a}
+.edit-button{padding:8px 7px;display:flex;align-items:center;justify-content:center}
+.empty{background:#fff;border:1px dashed var(--line);border-radius:12px;text-align:center;padding:22px;color:var(--muted);font-size:13px}
+.modal-backdrop{position:fixed;inset:0;background:#0b2119a8;display:none;align-items:flex-end;justify-content:center;padding:12px;z-index:10}
+.modal-backdrop.open{display:flex}
+.modal{width:min(520px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:18px;padding:17px}
+.modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
+.modal-head h2{text-align:left}
+.close-button{font-size:20px;padding:4px 10px}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:12px;font-weight:800;margin-bottom:5px}
+.field input{width:100%;padding:11px;border:1px solid #cfdcd3;border-radius:9px;background:#fff;color:var(--ink);font:inherit;min-height:42px}
 .form-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
-@media(max-width:390px){main{padding:10px}.trip-card{grid-template-columns:minmax(0,1fr) 102px 34px;padding:8px;gap:6px}.weight-number{font-size:21px}.weight-unit{font-size:11px}.plate{font-size:14px}.supplier-card{padding:9px}.supplier-name{font-size:12px}}
+@media(max-width:390px){
+ main{padding:10px}
+ .trip-card{grid-template-columns:minmax(0,1fr) 102px 34px;padding:8px;gap:6px}
+ .weight-number{font-size:21px}
+ .weight-unit{font-size:11px}
+ .plate{font-size:14px}
+ .supplier-card{padding:9px}
+ .supplier-name{font-size:12px}
+}
 </style>
 </head>
 <body>
-<header><div class="brand"><img class="logo" src="logo-fly-ash.jpg" alt="Logo Fly ASH" onerror="this.style.display='none'"><div><h1>Fly ASH</h1><p>THEO DÕI KẾ HOẠCH VÀ KHỐI LƯỢNG CUNG CẤP</p></div></div></header>
+<header>
+  <div class="brand">
+    <img class="logo" src="logo-fly-ash.jpg" alt="Logo Fly ASH" onerror="this.style.display='none'">
+    <div>
+      <h1>Fly ASH</h1>
+      <p>THEO DÕI KẾ HOẠCH VÀ KHỐI LƯỢNG CUNG CẤP</p>
+    </div>
+  </div>
+</header>
+
 <main>
-<section class="shift-panel"><div class="section-label">CA LÀM VIỆC</div><div class="shift-options">
-<label class="shift-option"><input type="radio" name="shift" value="Ca 1" checked><span>Ca 1</span></label>
-<label class="shift-option"><input type="radio" name="shift" value="Ca 2"><span>Ca 2</span></label>
-<label class="shift-option"><input type="radio" name="shift" value="Ca 3"><span>Ca 3</span></label>
-</div></section>
-<div id="status" class="status">Đang tải dữ liệu Google Sheets…</div>
-<div class="topline"><h2>TỔNG QUAN CUNG CẤP</h2><button type="button" onclick="loadData()">↻ Làm mới</button></div>
-<div id="summary" class="summary"></div><div id="summaryNote" class="summary-note"></div>
-<div class="add-row"><button class="primary" type="button" onclick="openAddForm()">＋ Add</button></div>
-<section><div class="topline"><h2>DANH SÁCH CHUYẾN XE</h2></div><div id="tripList" class="trip-list"><div class="empty">Đang tải…</div></div></section>
+  <section class="shift-panel">
+    <div class="section-label">CA LÀM VIỆC</div>
+    <div class="shift-options">
+      <label class="shift-option"><input type="radio" name="shift" value="Ca 1" checked><span>Ca 1</span></label>
+      <label class="shift-option"><input type="radio" name="shift" value="Ca 2"><span>Ca 2</span></label>
+      <label class="shift-option"><input type="radio" name="shift" value="Ca 3"><span>Ca 3</span></label>
+    </div>
+  </section>
+
+  <div id="status" class="status">Đang tải dữ liệu Google Sheets…</div>
+
+  <div class="topline">
+    <h2>TỔNG QUAN CUNG CẤP</h2>
+    <button type="button" onclick="loadData()">↻ Làm mới</button>
+  </div>
+
+  <div id="summary" class="summary"></div>
+  <div id="summaryNote" class="summary-note"></div>
+
+  <div class="add-row">
+    <button class="primary" type="button" onclick="openAddForm()">＋ Add</button>
+  </div>
+
+  <section>
+    <div class="topline"><h2>DANH SÁCH CHUYẾN XE</h2></div>
+    <div id="tripList" class="trip-list"><div class="empty">Đang tải…</div></div>
+  </section>
 </main>
+
 <div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="formTitle">
-<div class="modal"><div class="modal-head"><h2 id="formTitle">Thêm chuyến xe</h2><button class="close-button" type="button" onclick="closeForm()">×</button></div>
-<form id="tripForm"><input type="hidden" id="tripId">
-<div class="field"><label for="plate">BIỂN SỐ XE</label><input id="plate" list="vehicleOptions" autocomplete="off" required placeholder="Chọn hoặc nhập biển số xe"><datalist id="vehicleOptions"></datalist></div>
-<div class="field"><label for="supplier">NHÀ CUNG CẤP</label><input id="supplier" required placeholder="Tự điền theo biển số xe"></div>
-<div class="field"><label for="startTime">THỜI GIAN BẮT ĐẦU</label><input id="startTime" type="time" required></div>
-<div class="field"><label for="endTime">THỜI GIAN KẾT THÚC</label><input id="endTime" type="time" required></div>
-<div class="field"><label for="tonnes">KHỐI LƯỢNG</label><input id="tonnes" type="number" min="0" step="0.01" required placeholder="Nhập khối lượng (tấn)"></div>
-<div class="form-actions"><button type="button" onclick="closeForm()">Hủy</button><button id="saveButton" class="primary" type="submit">Lưu</button></div></form></div></div>
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="formTitle">Thêm chuyến xe</h2>
+      <button class="close-button" type="button" onclick="closeForm()">×</button>
+    </div>
+
+    <form id="tripForm">
+      <input type="hidden" id="tripId">
+
+      <div class="field">
+        <label for="plate">BIỂN SỐ XE</label>
+        <input id="plate" list="vehicleOptions" autocomplete="off" required placeholder="Chọn hoặc nhập biển số xe">
+        <datalist id="vehicleOptions"></datalist>
+      </div>
+
+      <div class="field">
+        <label for="supplier">NHÀ CUNG CẤP</label>
+        <input id="supplier" required placeholder="Tự điền theo biển số xe">
+      </div>
+
+      <div class="field">
+        <label for="startTime">THỜI GIAN BẮT ĐẦU</label>
+        <input id="startTime" type="time" required>
+      </div>
+
+      <div class="field">
+        <label for="endTime">THỜI GIAN KẾT THÚC</label>
+        <input id="endTime" type="time" required>
+      </div>
+
+      <div class="field">
+        <label for="tonnes">KHỐI LƯỢNG</label>
+        <input id="tonnes" type="number" min="0" step="0.01" required placeholder="Nhập khối lượng (tấn)">
+      </div>
+
+      <div class="form-actions">
+        <button type="button" onclick="closeForm()">Hủy</button>
+        <button id="saveButton" class="primary" type="submit">Lưu</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <script>
 const API_URL='https://script.google.com/macros/s/AKfycbwCFqK6yy_iuj7eymSU9uZMzVhE4TqLMOJMX8Ul_xrvOhk5OSbJTkYoxcrN0ixbl9wkdg/exec';
-let appData={suppliers:[],vehicles:[],deliveries:[]},selectedShift='Ca 1',requestSequence=0;
-function currentShift(){const el=document.querySelector('input[name="shift"]:checked');return el?el.value:'Ca 1'}
-function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function fmt(v){if(v===null||v===undefined||v==='')return '—';const n=Number(v);return Number.isFinite(n)?n.toLocaleString('vi-VN',{maximumFractionDigits:2}):String(v)}
-function status(msg,error){const el=document.getElementById('status');el.textContent=msg;el.className=error?'status error':'status'}
-function jsonp(params,ms){return new Promise((resolve,reject)=>{const cb='flyAshCallback_'+Date.now()+'_'+Math.floor(Math.random()*100000),script=document.createElement('script');let done=false;const timer=setTimeout(()=>finish(new Error('Quá thời gian chờ phản hồi từ Apps Script.')),ms||20000);function finish(err,data){if(done)return;done=true;clearTimeout(timer);try{delete window[cb]}catch(_){window[cb]=undefined}if(script.parentNode)script.parentNode.removeChild(script);err?reject(err):resolve(data)}window[cb]=data=>finish(null,data);script.onerror=()=>finish(new Error('Không kết nối được Apps Script. Kiểm tra URL và quyền triển khai.'));const query=new URLSearchParams(Object.assign({},params,{callback:cb,t:Date.now()}));script.src=API_URL+(API_URL.includes('?')?'&':'?')+query.toString();document.body.appendChild(script)})}
-async function loadData(){const seq=++requestSequence;selectedShift=currentShift();status('Đang tải dữ liệu cho '+selectedShift+'…',false);try{const data=await jsonp({shift:selectedShift});if(seq!==requestSequence)return;if(!data||!data.ok)throw new Error(data&&data.error?data.error:'Không đọc được dữ liệu.');appData=data;renderSummary(data.suppliers||[]);renderVehicles(data.vehicles||[]);renderTrips(data.deliveries||[]);const legacy=Number(data.legacyCount||0);document.getElementById('summaryNote').textContent='Kế hoạch và tổng thực tế hiện lấy theo tổng đang có trong bảng tính, chưa chia theo ca.'+(legacy?' '+legacy+' dòng cũ trên DASHBOARD chưa xác định ca nên chưa đưa vào danh sách theo ca.':'');status('Đã tải dữ liệu '+selectedShift+'.',false)}catch(err){if(seq!==requestSequence)return;status(err.message||'Lỗi khi tải dữ liệu.',true)}}
-function renderSummary(items){const el=document.getElementById('summary');if(!items.length){el.innerHTML='<div class="empty">Chưa có thông tin nhà cung cấp.</div>';return}el.innerHTML=items.map(s=>`<article class="supplier-card"><div class="supplier-name">${esc(s.name)}</div><div class="metric-label">KẾ HOẠCH</div><div class="metric">${fmt(s.plan)} <span style="font-size:13px">tấn</span></div><div class="metric-label">ĐÃ CUNG CẤP</div><div class="metric actual">${fmt(s.actual)} <span style="font-size:13px">tấn</span></div><div class="remaining"><span>CÒN LẠI</span><strong>${fmt(s.remaining)} tấn</strong></div></article>`).join('')}
-function renderVehicles(items){document.getElementById('vehicleOptions').innerHTML=items.map(v=>`<option value="${esc(v.plate)}">${esc(v.supplier)}</option>`).join('')}
-function renderTrips(items){const el=document.getElementById('tripList');if(!items.length){el.innerHTML='<div class="empty">Chưa có chuyến xe cho '+esc(selectedShift)+'.</div>';return}el.innerHTML=items.map(d=>`<article class="trip-card"><div class="trip-main"><div class="plate">${esc(d.plate)}</div><div class="trip-supplier">${esc(d.supplier)}</div><div class="trip-time">${esc(d.startTime||'—')} – ${esc(d.endTime||'—')}</div></div><div class="weight-box"><div class="weight-label">KHỐI LƯỢNG</div><div class="weight-line"><span class="weight-number">${esc(fmt(d.tonnes))}</span><span class="weight-unit">tấn</span></div></div><button class="edit-button" type="button" title="Sửa chuyến xe" aria-label="Sửa chuyến xe" onclick="openEditForm('${esc(d.id)}')">✎</button></article>`).join('')}
-function openAddForm(){document.getElementById('tripForm').reset();document.getElementById('tripId').value='';document.getElementById('formTitle').textContent='Thêm chuyến xe · '+currentShift();document.getElementById('modalBackdrop').classList.add('open')}
-function openEditForm(id){const d=(appData.deliveries||[]).find(x=>String(x.id)===String(id));if(!d){status('Không tìm thấy chuyến xe cần sửa. Hãy tải lại dữ liệu.',true);return}document.getElementById('tripId').value=d.id;document.getElementById('plate').value=d.plate||'';document.getElementById('supplier').value=d.supplier||'';document.getElementById('startTime').value=normTime(d.startTime);document.getElementById('endTime').value=normTime(d.endTime);document.getElementById('tonnes').value=String(d.tonnes||'').replace(',','.');document.getElementById('formTitle').textContent='Sửa chuyến xe · '+(d.shift||currentShift());document.getElementById('modalBackdrop').classList.add('open')}
-function normTime(v){const m=String(v||'').trim().match(/^(\d{1,2}):(\d{2})/);return m?m[1].padStart(2,'0')+':'+m[2]:''}
-function closeForm(){document.getElementById('modalBackdrop').classList.remove('open')}
-function fillSupplier(){const plate=document.getElementById('plate').value.trim().toLocaleLowerCase('vi');const v=(appData.vehicles||[]).find(x=>String(x.plate).trim().toLocaleLowerCase('vi')===plate);if(v)document.getElementById('supplier').value=v.supplier||''}
-document.getElementById('plate').addEventListener('input',fillSupplier);document.getElementById('plate').addEventListener('change',fillSupplier);
-document.querySelectorAll('input[name="shift"]').forEach(el=>el.addEventListener('change',loadData));
-document.getElementById('modalBackdrop').addEventListener('click',e=>{if(e.target.id==='modalBackdrop')closeForm()});
-document.getElementById('tripForm').addEventListener('submit',async e=>{e.preventDefault();const btn=document.getElementById('saveButton');btn.disabled=true;btn.textContent='Đang lưu…';const payload={id:document.getElementById('tripId').value.trim(),shift:currentShift(),plate:document.getElementById('plate').value.trim(),supplier:document.getElementById('supplier').value.trim(),startTime:document.getElementById('startTime').value,endTime:document.getElementById('endTime').value,tonnes:document.getElementById('tonnes').value};try{const result=await jsonp({action:'saveTrip',payload:JSON.stringify(payload)},25000);if(!result||!result.ok)throw new Error(result&&result.error?result.error:'Không lưu được chuyến xe.');closeForm();status(result.message||'Đã lưu chuyến xe.',false);await loadData()}catch(err){status(err.message||'Lỗi khi lưu chuyến xe.',true)}finally{btn.disabled=false;btn.textContent='Lưu'}});
+
+let appData={suppliers:[],vehicles:[],deliveries:[]};
+let selectedShift='Ca 1';
+let requestSequence=0;
+
+function currentShift(){
+  const el=document.querySelector('input[name="shift"]:checked');
+  return el?el.value:'Ca 1';
+}
+
+function esc(v){
+  return String(v==null?'':v).replace(/[&<>"']/g,c=>({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[c]));
+}
+
+function fmt(v){
+  if(v===null||v===undefined||v==='')return '—';
+  const n=Number(v);
+  return Number.isFinite(n)?n.toLocaleString('vi-VN',{maximumFractionDigits:2}):String(v);
+}
+
+function status(msg,error){
+  const el=document.getElementById('status');
+  el.textContent=msg;
+  el.className=error?'status error':'status';
+}
+
+function jsonp(params,ms){
+  return new Promise((resolve,reject)=>{
+    const cb='flyAshCallback_'+Date.now()+'_'+Math.floor(Math.random()*100000);
+    const script=document.createElement('script');
+    let done=false;
+
+    const timer=setTimeout(
+      ()=>finish(new Error('Quá thời gian chờ phản hồi từ Apps Script.')),
+      ms||20000
+    );
+
+    function finish(err,data){
+      if(done)return;
+      done=true;
+      clearTimeout(timer);
+      try{delete window[cb]}catch(_){window[cb]=undefined}
+      if(script.parentNode)script.parentNode.removeChild(script);
+      err?reject(err):resolve(data);
+    }
+
+    window[cb]=data=>finish(null,data);
+    script.onerror=()=>finish(new Error('Không kết nối được Apps Script. Kiểm tra URL và quyền triển khai.'));
+
+    const query=new URLSearchParams(
+      Object.assign({},params,{callback:cb,t:Date.now()})
+    );
+
+    script.src=API_URL+(API_URL.includes('?')?'&':'?')+query.toString();
+    document.body.appendChild(script);
+  });
+}
+
+async function loadData(){
+  const seq=++requestSequence;
+  selectedShift=currentShift();
+  status('Đang tải dữ liệu cho '+selectedShift+'…',false);
+
+  try{
+    const data=await jsonp({shift:selectedShift});
+    if(seq!==requestSequence)return;
+    if(!data||!data.ok)throw new Error(data&&data.error?data.error:'Không đọc được dữ liệu.');
+
+    appData=data;
+    renderSummary(data.suppliers||[]);
+    renderVehicles(data.vehicles||[]);
+    renderTrips(data.deliveries||[]);
+
+    const legacy=Number(data.legacyCount||0);
+    document.getElementById('summaryNote').textContent=
+      'Kế hoạch và tổng thực tế hiện lấy theo tổng đang có trong bảng tính, chưa chia theo ca.'+
+      (legacy?' '+legacy+' dòng cũ trên DASHBOARD chưa xác định ca nên chưa đưa vào danh sách theo ca.':'');
+
+    status('Đã tải dữ liệu '+selectedShift+'.',false);
+  }catch(err){
+    if(seq!==requestSequence)return;
+    status(err.message||'Lỗi khi tải dữ liệu.',true);
+  }
+}
+
+function renderSummary(items){
+  const el=document.getElementById('summary');
+
+  if(!items.length){
+    el.innerHTML='<div class="empty">Chưa có thông tin nhà cung cấp.</div>';
+    return;
+  }
+
+  el.innerHTML=items.map(s=>`
+    <article class="supplier-card">
+      <div class="supplier-name">${esc(s.name)}</div>
+      <div class="metric-label">KẾ HOẠCH</div>
+      <div class="metric">${fmt(s.plan)} <span style="font-size:13px">tấn</span></div>
+      <div class="metric-label">ĐÃ CUNG CẤP</div>
+      <div class="metric actual">${fmt(s.actual)} <span style="font-size:13px">tấn</span></div>
+      <div class="remaining"><span>CÒN LẠI</span><strong>${fmt(s.remaining)} tấn</strong></div>
+    </article>
+  `).join('');
+}
+
+function renderVehicles(items){
+  document.getElementById('vehicleOptions').innerHTML=items.map(v=>
+    `<option value="${esc(v.plate)}">${esc(v.supplier)}</option>`
+  ).join('');
+}
+
+function renderTrips(items){
+  const el=document.getElementById('tripList');
+
+  if(!items.length){
+    el.innerHTML='<div class="empty">Chưa có chuyến xe cho '+esc(selectedShift)+'.</div>';
+    return;
+  }
+
+  el.innerHTML=items.map(d=>`
+    <article class="trip-card">
+      <div class="trip-main">
+        <div class="plate">${esc(d.plate)}</div>
+        <div class="trip-supplier">${esc(d.supplier)}</div>
+        <div class="trip-time">${esc(d.startTime||'—')} – ${esc(d.endTime||'—')}</div>
+      </div>
+
+      <div class="weight-box">
+        <div class="weight-label">KHỐI LƯỢNG</div>
+        <div class="weight-line">
+          <span class="weight-number">${esc(fmt(d.tonnes))}</span>
+          <span class="weight-unit">tấn</span>
+        </div>
+      </div>
+
+      <button class="edit-button" type="button" title="Sửa chuyến xe" aria-label="Sửa chuyến xe" onclick="openEditForm('${esc(d.id)}')">✎</button>
+    </article>
+  `).join('');
+}
+
+function openAddForm(){
+  document.getElementById('tripForm').reset();
+  document.getElementById('tripId').value='';
+  document.getElementById('formTitle').textContent='Thêm chuyến xe · '+currentShift();
+  document.getElementById('modalBackdrop').classList.add('open');
+}
+
+function openEditForm(id){
+  const d=(appData.deliveries||[]).find(x=>String(x.id)===String(id));
+
+  if(!d){
+    status('Không tìm thấy chuyến xe cần sửa. Hãy tải lại dữ liệu.',true);
+    return;
+  }
+
+  document.getElementById('tripId').value=d.id;
+  document.getElementById('plate').value=d.plate||'';
+  document.getElementById('supplier').value=d.supplier||'';
+  document.getElementById('startTime').value=normTime(d.startTime);
+  document.getElementById('endTime').value=normTime(d.endTime);
+  document.getElementById('tonnes').value=String(d.tonnes||'').replace(',','.');
+  document.getElementById('formTitle').textContent='Sửa chuyến xe · '+(d.shift||currentShift());
+  document.getElementById('modalBackdrop').classList.add('open');
+}
+
+function normTime(v){
+  const m=String(v||'').trim().match(/^(\d{1,2}):(\d{2})/);
+  return m?m[1].padStart(2,'0')+':'+m[2]:'';
+}
+
+function closeForm(){
+  document.getElementById('modalBackdrop').classList.remove('open');
+}
+
+function fillSupplier(){
+  const plate=document.getElementById('plate').value.trim().toLocaleLowerCase('vi');
+  const v=(appData.vehicles||[]).find(x=>
+    String(x.plate).trim().toLocaleLowerCase('vi')===plate
+  );
+  if(v)document.getElementById('supplier').value=v.supplier||'';
+}
+
+document.getElementById('plate').addEventListener('input',fillSupplier);
+document.getElementById('plate').addEventListener('change',fillSupplier);
+document.querySelectorAll('input[name="shift"]').forEach(el=>
+  el.addEventListener('change',loadData)
+);
+
+document.getElementById('modalBackdrop').addEventListener('click',e=>{
+  if(e.target.id==='modalBackdrop')closeForm();
+});
+
+document.getElementById('tripForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+
+  const btn=document.getElementById('saveButton');
+  btn.disabled=true;
+  btn.textContent='Đang lưu…';
+
+  const payload={
+    id:document.getElementById('tripId').value.trim(),
+    shift:currentShift(),
+    plate:document.getElementById('plate').value.trim(),
+    supplier:document.getElementById('supplier').value.trim(),
+    startTime:document.getElementById('startTime').value,
+    endTime:document.getElementById('endTime').value,
+    tonnes:document.getElementById('tonnes').value
+  };
+
+  try{
+    const result=await jsonp(
+      {action:'saveTrip',payload:JSON.stringify(payload)},
+      25000
+    );
+
+    if(!result||!result.ok){
+      throw new Error(result&&result.error?result.error:'Không lưu được chuyến xe.');
+    }
+
+    closeForm();
+    status(result.message||'Đã lưu chuyến xe.',false);
+    await loadData();
+  }catch(err){
+    status(err.message||'Lỗi khi lưu chuyến xe.',true);
+  }finally{
+    btn.disabled=false;
+    btn.textContent='Lưu';
+  }
+});
+
 loadData();
 </script>
 </body>
